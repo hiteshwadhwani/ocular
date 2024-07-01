@@ -20,6 +20,7 @@
   "dependencies": {
     "@types/jest": "^29.5.12",
     "axios": "^1.7.2",
+    "dompurify": "^3.1.5",
     "ocular-telemetry": "^1.0.0",
     "pdf-parse": "^1.1.1",
     "scrypt-kdf": "^2.0.1",

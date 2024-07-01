@@ -202,13 +202,13 @@ module.exports = {
     //     },
     //   },
     // },
-    {
-      resolve: `qdrant-vector-search-service`,
-      options: {
-        quadrant_db_url: process.env.QDRANT_DB_URL || "http://localhost:6333",
-        embedding_size: 768,
-      },
-    },
+    // {
+    //   resolve: `qdrant-vector-search-service`,
+    //   options: {
+    //     quadrant_db_url: process.env.QDRANT_DB_URL || "http://localhost:6333",
+    //     embedding_size: 768,
+    //   },
+    // },
     {
       resolve: `pinecone-vector-search-service`,
       options: {

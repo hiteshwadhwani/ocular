@@ -15,6 +15,8 @@ import {
 } from "@ocular/types";
 import { ConfigModule } from "@ocular/ocular/src/types";
 import puppeteer, { Browser, Page } from "puppeteer";
+import {JSDOM} from "jsdom"
+import createDOMPurify from "dompurify"
 
 interface metadataLink {
   location: string;
@@ -215,11 +217,21 @@ export default class webConnectorService extends TransactionBaseService {
         }, "");
       });
 
-      pageTextArray.push({ text: pageText, location: final_Url });
+      pageTextArray.push({ text: this.purifyScrappedContent(pageText), location: final_Url });
     }
 
     await browser.close();
     return pageTextArray;
+  }
+
+  // this 
+  purifyScrappedContent(content: string){
+    // create a virtual dom to use the dompurify library
+    const window = new JSDOM('').window;
+    const DOMPurify = createDOMPurify(window);
+    const cleanContent = DOMPurify.sanitize(content)
+    const cleanText = Array.from(new JSDOM(cleanContent).window.document.body.children).map(element => element.textContent).join('\n');
+    return cleanText
   }
 
   async get_internal_links(
